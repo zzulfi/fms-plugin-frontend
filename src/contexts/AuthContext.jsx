@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import roleplayers from '@/data/roleplayers'
+import roleplayers from '@/data/roleplayers.js'
 
 const AuthContext = createContext(null)
 
