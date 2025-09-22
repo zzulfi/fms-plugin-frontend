@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Plus } from 'lucide-react'
-import teams from '@/data/teams.js'
+import teams from '@/data/teams'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
