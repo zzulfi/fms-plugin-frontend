@@ -8,7 +8,7 @@ import { LoginPage } from '../components/custom/LoginPage'
 import ProtectedRoute from '../components/custom/ProtectedRoute'
 
 // Create the router configuration
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
