@@ -1,4 +1,4 @@
-import teams from "./teams.js";
+import teams from "./teams";
 
 const rolePlayers = [
     {
@@ -12,28 +12,28 @@ const rolePlayers = [
         id: 2,
         name: `${teams[0].name} Lead`,
         accessLevel: "Limited",
-        mail : "user@example.com",
+        mail : "team1@example.com",
         password: "user123"
     },
     {
         id: 3,
         name: `${teams[1].name} Lead`,
         accessLevel: "Limited",
-        mail : "user2@example.com",
+        mail : "team2@example.com",
         password: "user123"
     },
     {
         id: 4,
         name: `${teams[2].name} Lead`,
         accessLevel: "Limited",
-        mail : "user3@example.com",
+        mail : "team3@example.com",
         password: "user123"
     },
     {
         id: 5,
         name: `${teams[3].name} Lead`,
         accessLevel: "Limited",
-        mail : "user4@example.com",
+        mail : "team4@example.com",
         password: "user123"
     }
 ]
