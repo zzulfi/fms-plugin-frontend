@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { Plus, Search, Filter, ArrowDownWideNarrow, ArrowUp, ArrowDown } from 'lucide-react'
-import participants from '@/data/participants'
+import participants from '@/data/participants.js'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
