@@ -1,8 +1,8 @@
 import React from 'react'
 import { useAuth } from '../../contexts/AuthContext'
-import { BarChart3, Users, User, Gavel } from 'lucide-react'
+import { BarChart3, Users, Gavel, Heart, UserPlus } from 'lucide-react'
 
-const AdminHeader = ({ activeTab, setActiveTab }) => {
+const TeamHeader = ({ activeTab, setActiveTab }) => {
   const { user, logout } = useAuth()
 
   const handleLogout = () => {
@@ -11,9 +11,10 @@ const AdminHeader = ({ activeTab, setActiveTab }) => {
 
   const navItems = [
     { id: 'dashboard', name: 'Dashboard', icon: BarChart3 },
-    { id: 'teams', name: 'Teams', icon: Users },
     { id: 'candidates', name: 'Candidates', icon: Users },
-    { id: 'participants', name: 'Participants', icon: User },
+    { id: 'registrations', name: 'Registrations', icon: UserPlus },
+    { id: 'participants', name: 'Participants', icon: Users },
+    { id: 'wishlist', name: 'Wish List', icon: Heart },
     { id: 'auction', name: 'Auction Room', icon: Gavel },
   ]
 
@@ -47,7 +48,7 @@ const AdminHeader = ({ activeTab, setActiveTab }) => {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full text-left flex items-center px-4 py-2 rounded-4xl text-sm font-medium transition-all duration-200 ${
+                className={`w-full text-left flex items-center px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                   activeTab === item.id
                     ? 'border-2 border-yellow-400 text-yellow-600 font-semibold'
                     : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
@@ -64,4 +65,4 @@ const AdminHeader = ({ activeTab, setActiveTab }) => {
   )
 }
 
-export default AdminHeader
+export default TeamHeader

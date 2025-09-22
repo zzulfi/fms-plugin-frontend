@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../components/layout/Layout'
 import Home from '../components/layout/Home'
 import AdminLayout from '../components/layout/AdminLayout'
-import TeamDashBoard from '../components/team-manager/TeamDashBoard'
+import TeamLayout from '../components/layout/TeamLayout'
 import { LoginPage } from '../components/custom/LoginPage'
 import ProtectedRoute from '../components/custom/ProtectedRoute'
 
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         path: "team",
         element: (
           <ProtectedRoute>
-            <TeamDashBoard />
+            <TeamLayout />
           </ProtectedRoute>
         )
       }

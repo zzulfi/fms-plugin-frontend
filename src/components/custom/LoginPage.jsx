@@ -12,6 +12,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useAuth } from "../../contexts/AuthContext"
+import logoImg from '/image.png'
+import textLogo from '/logo.png'
 
 export function LoginPage() {
   const [email, setEmail] = useState("")
@@ -73,11 +75,9 @@ export function LoginForm({
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
-        <CardHeader className={"space-y-1 text-center"}>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+        <CardHeader className={"flex flex-row items-center justify-center gap-3"}>
+          <img src={logoImg} alt="Festie Logo" className='w-10' />
+          <img src={textLogo} alt="Festie Text Logo" className='w-24' />
         </CardHeader>
         <CardContent>
           <form onSubmit={onSubmit}>
@@ -117,7 +117,7 @@ export function LoginForm({
                 />
               </div>
               <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="cursor-pointer w-full bg-yellow-400 hover:bg-yellow-300 text-white" disabled={loading}>
                   {loading ? "Logging in..." : "Login"}
                 </Button>
                 <Button variant="outline" className="w-full hidden" type="button">
@@ -135,7 +135,7 @@ export function LoginForm({
               <p className="mb-2 text-gray-600">Demo Credentials:</p>
               <p className="text-xs text-gray-500">
                 Admin: admin@example.com / admin123<br />
-                Team Lead: user@example.com / user123
+                Team Lead: team1@example.com / user123
               </p>
             </div>
           </form>

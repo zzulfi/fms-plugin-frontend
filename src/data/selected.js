@@ -1,6 +1,6 @@
-import teams from "./teams"
+import teams from "./teams.js";
 
-const wishList = [
+const selectedParticipants = [
     {
         id: 1,
         team: teams[0].name,
@@ -21,6 +21,6 @@ const wishList = [
         team: teams[3].name,
         participants: []
     }
-]
+];
 
-export default wishList
+export default selectedParticipants;

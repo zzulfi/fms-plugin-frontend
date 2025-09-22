@@ -59,15 +59,15 @@ const Teams = () => {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-2xl font-bold mb-2">Team Management</h2>
-          <p className="text-muted-foreground">
+          <h2 className="text-2xl font-bold mb-2 text-gray-900">Team Management</h2>
+          <p className="text-gray-600">
             Here you can manage teams and their configurations.
           </p>
         </div>
         
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
-            <Button className="flex items-center gap-2">
+            <Button className="bg-yellow-400 hover:bg-yellow-500 text-black flex items-center gap-2">
               <Plus className="h-4 w-4" />
               Add Team
             </Button>
@@ -125,7 +125,7 @@ const Teams = () => {
               </div>
               
               <div className="flex gap-2 pt-4">
-                <Button type="submit" className="flex-1">
+                <Button type="submit" className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black">
                   Add Team
                 </Button>
                 <Button 
