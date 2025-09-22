@@ -1,4 +1,4 @@
-import teams from "./teams";
+import teams from "./teams.js";
 
 const rolePlayers = [
     {

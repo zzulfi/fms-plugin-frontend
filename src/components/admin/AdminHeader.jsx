@@ -18,11 +18,11 @@ const AdminHeader = ({ activeTab, setActiveTab }) => {
   ]
 
   return (
-    <header className="bg-white border border-gray-200 shadow-sm rounded-lg max-w-fit mx-auto mb-6">
+    <header className="bg-white border border-gray-200 shadow-sm rounded-lg mx-auto mb-6">
       <div className="px-6">
-        <div className="flex justify-center items-center h-14">
-          {/* Navigation Tabs */}
-          <nav className="hidden md:flex space-x-6">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex justify-center items-center h-14">
+          <nav className="flex space-x-6">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -40,21 +40,21 @@ const AdminHeader = ({ activeTab, setActiveTab }) => {
           </nav>
         </div>
 
-        {/* Mobile Navigation */}
-        <div className="md:hidden border-t border-gray-200">
-          <div className="py-3 space-y-2">
+        {/* Mobile Navigation - Grid Layout */}
+        <div className="md:hidden py-4">
+          <div className="grid grid-cols-2 gap-3">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full text-left flex items-center px-4 py-2 rounded-4xl text-sm font-medium transition-all duration-200 ${
+                className={`flex flex-col items-center justify-center p-4 rounded-xl text-xs font-medium transition-all duration-200 min-h-[80px] ${
                   activeTab === item.id
-                    ? 'border-2 border-yellow-400 text-yellow-600 font-semibold'
-                    : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                    ? 'bg-yellow-50 border-2 border-yellow-400 text-yellow-600 font-semibold'
+                    : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-gray-200'
                 }`}
               >
-                <item.icon className="mr-2 h-4 w-4" />
-                {item.name}
+                <item.icon className="h-6 w-6 mb-2" />
+                <span className="text-center leading-tight">{item.name}</span>
               </button>
             ))}
           </div>

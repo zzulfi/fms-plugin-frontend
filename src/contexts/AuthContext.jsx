@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import rolePlayers from '../data/rolePlayers'
+import roleplayers from '@/data/roleplayers.js'
 
 const AuthContext = createContext(null)
 
@@ -26,8 +26,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      // Find user in rolePlayers data
-      const foundUser = rolePlayers.find(
+      // Find user in roleplayers data
+      const foundUser = roleplayers.find(
         (player) => player.mail === email && player.password === password
       )
 
