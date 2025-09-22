@@ -8,8 +8,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import notSelectedParticipants from '@/data/notSelected'
-import wishListData from '@/data/wishList'
+import notSelectedParticipants from '@/data/notselected'
+import wishListData from '@/data/wishlist'
 
 const Participants = () => {
   const [participantsList] = useState(notSelectedParticipants)
