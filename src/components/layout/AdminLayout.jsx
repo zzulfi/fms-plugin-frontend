@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import AdminHeader from './AdminHeader'
-import Teams from './Teams'
-import Candidates from './Candidates'
-import AuctionRoom from './AuctionRoom'
-import { BarChart3, Users, User, Gavel } from 'lucide-react'
+import AdminHeader from '../admin/AdminHeader'
+import Teams from '../admin/Teams'
+import Candidates from '../admin/Candidates'
+import AuctionRoom from '../admin/AuctionRoom'
 
 const AdminLayout = () => {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -21,10 +20,7 @@ const AdminLayout = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                 <div className="bg-card p-6 rounded-lg border shadow-sm">
-                  <div className="flex items-center mb-2">
-                    <BarChart3 className="h-6 w-6 text-primary mr-2" />
-                    <h3 className="text-xl font-semibold">Team Management</h3>
-                  </div>
+                  <h3 className="text-xl font-semibold mb-2"> Team Management</h3>
                   <p className="text-muted-foreground mb-4">Manage teams and their configurations</p>
                   <button 
                     onClick={() => setActiveTab('teams')}
@@ -35,10 +31,7 @@ const AdminLayout = () => {
                 </div>
                 
                 <div className="bg-card p-6 rounded-lg border shadow-sm">
-                  <div className="flex items-center mb-2">
-                    <User className="h-6 w-6 text-primary mr-2" />
-                    <h3 className="text-xl font-semibold">Candidate Management</h3>
-                  </div>
+                  <h3 className="text-xl font-semibold mb-2"> Candidate Management</h3>
                   <p className="text-muted-foreground mb-4">Oversee candidate registrations</p>
                   <button 
                     onClick={() => setActiveTab('candidates')}
@@ -49,10 +42,7 @@ const AdminLayout = () => {
                 </div>
                 
                 <div className="bg-card p-6 rounded-lg border shadow-sm">
-                  <div className="flex items-center mb-2">
-                    <Gavel className="h-6 w-6 text-primary mr-2" />
-                    <h3 className="text-xl font-semibold">Auction Room</h3>
-                  </div>
+                  <h3 className="text-xl font-semibold mb-2"> Auction Room</h3>
                   <p className="text-muted-foreground mb-4">Control the auction process</p>
                   <button 
                     onClick={() => setActiveTab('auction')}

@@ -29,3 +29,5 @@ const candidates = [
         Status : "Available",
     },
 ]
+
+export default candidates;

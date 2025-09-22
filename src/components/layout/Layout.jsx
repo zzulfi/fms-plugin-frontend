@@ -18,33 +18,13 @@ const Layout = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo/Brand */}
             <div className="flex-shrink-0">
-              <h1 className="text-xl font-bold text-gray-900">FMS Plugin</h1>
+              <h1 className="text-xl font-sembold text-gray-900">Festie</h1>
             </div>
             
             {/* Navigation Links */}
             <div className="flex items-center space-x-8">
               {isAuthenticated ? (
                 <>
-                  <Link 
-                    to="/" 
-                    className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                  >
-                    Home
-                  </Link>
-                  {isAdmin() && (
-                    <Link 
-                      to="/admin" 
-                      className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                    >
-                      Admin Dashboard
-                    </Link>
-                  )}
-                  <Link 
-                    to="/team" 
-                    className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                  >
-                    Team Manager
-                  </Link>
                   <div className="flex items-center space-x-4">
                     <span className="text-sm text-gray-600">
                       Welcome, {user?.name}

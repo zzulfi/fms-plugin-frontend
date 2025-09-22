@@ -1,26 +1,26 @@
 const teams = [
     {
         id: 1,
-        name: "Team Alpha",
-        Manager: "Alice",
-        Colour : "Red",
-    },
-    {
-        id: 2,
-        name: "Team Beta",
-        Manager: "Bob",
-        Colour : "Blue",
-    },
-    {
-        id: 3,
-        name: "Team Gamma",
-        Manager: "Charlie",
+        name: "Axis",
+        Manager: "Midhlaj PM",
         Colour : "Green",
     },
     {
+        id: 2,
+        name: "Equinox",
+        Manager: "Sinan KT",
+        Colour : "Red",
+    },
+    {
+        id: 3,
+        name: "Nexus",
+        Manager: "Naseeh",
+        Colour : "Blue",
+    },
+    {
         id: 4,
-        name: "Team Delta",
-        Manager: "Diana",
+        name: "Vertex",
+        Manager: "Rizwan",
         Colour : "Yellow",
     },
 ]
