@@ -1,4 +1,4 @@
-import teams from "./teams.js";
+import teams from "./teams";
 
 const selectedParticipants = [
     {
