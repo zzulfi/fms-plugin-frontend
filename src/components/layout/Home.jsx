@@ -3,43 +3,11 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
-    <div className="text-center">
-      <div className="max-w-md mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
-          Welcome to FMS Plugin
-        </h1>
-        
-        <p className="text-lg text-gray-600 mb-8">
-          Choose your dashboard to get started
-        </p>
-
-        <div className="space-y-4">
-          <Link 
-            to="/admin"
-            className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
-          >
-            🔧 Admin Dashboard
-          </Link>
-          
-          <Link 
-            to="/team"
-            className="block w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
-          >
-            👥 Team Manager Dashboard
-          </Link>
-        </div>
-
-        <div className="mt-12 text-sm text-gray-500">
-          <p>Features:</p>
-          <ul className="mt-2 space-y-1">
-            <li>• Admin management tools</li>
-            <li>• Team coordination features</li>
-            <li>• Real-time dashboard updates</li>
-          </ul>
-        </div>
-      </div>
+    <div className="text-center min-h-screen px-4 flex flex-col gap-5 justify-center items-center">
+      <h1 className="text-4xl font-semibold text-gray-900">Welcome to Festie</h1>
+      <h1 className="text-4xl font-normal text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia odio quam rem dolor aspernatur veritatis rerum excepturi maiores incidunt officiis sit, fugiat praesentium, minima, animi error quas sapiente quae? Soluta.</h1>
     </div>
   )
 }
 
-export default Home
+        export default Home
