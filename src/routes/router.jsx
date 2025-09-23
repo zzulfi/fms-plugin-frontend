@@ -8,6 +8,8 @@ import { LoginPage } from '../components/custom/LoginPage'
 import ProtectedRoute from '../components/custom/ProtectedRoute'
 
 // Create the router configuration
+import { Navigate } from 'react-router-dom'
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <RootRedirect />
       },
       {
         path: "admin",
@@ -40,5 +42,15 @@ const router = createBrowserRouter([
     element: <LoginPage />
   }
 ])
+
+import { useAuth } from '../contexts/AuthContext'
+
+function RootRedirect() {
+  const { isAuthenticated, isAdmin, loading } = useAuth()
+  if (loading) return null
+  if (!isAuthenticated) return <Navigate to="/login" replace />
+  if (isAdmin()) return <Navigate to="/admin" replace />
+  return <Navigate to="/team" replace />
+}
 
 export default router
