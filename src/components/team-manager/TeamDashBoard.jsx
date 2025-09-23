@@ -89,16 +89,16 @@ const TeamDashBoard = ({ setActiveTab }) => {
                 <Users className="h-6 w-6 text-blue-600" />
               </div>
               <div className="ml-4">
-                <h3 className="text-lg font-semibold text-gray-900">Player Management</h3>
+                <h3 className="text-lg font-semibold text-gray-900">Candidates Management</h3>
                 <p className="text-sm text-gray-600">15 players in team</p>
               </div>
             </div>
             <p className="text-gray-600 mb-4">View and manage your team's current player roster and statistics.</p>
             <button 
-              onClick={() => setActiveTab('participants')}
+              onClick={() => setActiveTab('candidates')}
               className="w-full bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-md font-medium transition-colors"
             >
-              Manage Players
+              Manage Candidates
             </button>
           </div>
           

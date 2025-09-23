@@ -12,11 +12,10 @@ import notSelectedParticipants from '@/data/notselected.js'
 import wishListData from '@/data/wishlist.js'
 
 const Participants = () => {
-  const [participantsList] = useState(notSelectedParticipants)
-  const [wishList, setWishList] = useState(() => {
-    const saved = localStorage.getItem('fms_wishlist')
-    return saved ? JSON.parse(saved) : wishListData
-  })
+  // clone participants so we can update status locally without mutating import
+  const [participantsList, setParticipantsList] = useState(() => notSelectedParticipants.map(p => ({ ...p })))
+  // keep wishlist in-memory only for this session (will reset on page refresh)
+  const [wishList, setWishList] = useState(() => wishListData)
   
   // Search, Filter, and Sort states
   const [searchTerm, setSearchTerm] = useState('')
@@ -29,17 +28,28 @@ const Participants = () => {
   // Mock current team (in real app, this would come from auth context)
   const currentTeam = "Axis" // This should come from auth context
 
-  // Listen for wishList changes from localStorage
-  useEffect(() => {
-    const handleStorageChange = (e) => {
-      if (e.key === 'fms_wishlist') {
-        setWishList(JSON.parse(e.newValue))
-      }
-    }
+  // Bulk selection state
+  const [selectedIds, setSelectedIds] = useState([])
 
-    window.addEventListener('storage', handleStorageChange)
-    return () => window.removeEventListener('storage', handleStorageChange)
-  }, [])
+  const handleSelect = (participantId) => {
+    setSelectedIds((prev) =>
+      prev.includes(participantId)
+        ? prev.filter((id) => id !== participantId)
+        : [...prev, participantId]
+    )
+  }
+
+  const handleBulkAdd = () => {
+    const toAdd = filteredAndSortedParticipants.filter(
+      (p) => selectedIds.includes(p.id) && !isInWishList(p.id)
+    )
+    if (toAdd.length === 0) return
+    // add each and update status inside addToWishList
+    toAdd.forEach((participant) => addToWishList(participant))
+    setSelectedIds([])
+  }
+
+  // wishlist is intentionally in-memory only for this session (no localStorage sync)
 
   // Get unique skills and statuses from current participants
   const uniqueSkills = [...new Set(participantsList.map(p => p.Skill))]
@@ -122,7 +132,11 @@ const Participants = () => {
     return currentWishList.some(p => p.id === participantId)
   }
   
+  // Add a single participant to the current team's wishlist and mark as In Wishlist
   const addToWishList = (participant) => {
+    // avoid duplicates
+    if (isInWishList(participant.id)) return
+
     const updatedWishList = wishList.map(teamWishList => {
       if (teamWishList.team === currentTeam) {
         return {
@@ -132,8 +146,13 @@ const Participants = () => {
       }
       return teamWishList
     })
+
+    // update component state and persist
     setWishList(updatedWishList)
     localStorage.setItem('fms_wishlist', JSON.stringify(updatedWishList))
+
+    // Update participantsList status
+    setParticipantsList(prev => prev.map(p => p.id === participant.id ? { ...p, Status: 'In Wishlist' } : p))
   }
   
   const removeFromWishList = (participantId) => {
@@ -148,6 +167,9 @@ const Participants = () => {
     })
     setWishList(updatedWishList)
     localStorage.setItem('fms_wishlist', JSON.stringify(updatedWishList))
+
+    // Update participantsList status back to Not Selected
+    setParticipantsList(prev => prev.map(p => p.id === participantId ? { ...p, Status: 'Not Selected' } : p))
   }
 
   return (
@@ -160,7 +182,17 @@ const Participants = () => {
         <div className="flex items-center gap-2">
           {/* Action Icons */}
           <div className="flex items-center gap-1 ml-2">
-            smthng
+            {/* Bulk Add Button */}
+            <Button
+              variant={selectedIds.length > 0 ? 'default' : 'ghost'}
+              size="icon"
+              title="Add selected to Wishlist"
+              onClick={handleBulkAdd}
+              disabled={selectedIds.length === 0}
+              className={`cursor-pointer transition-colors duration-200 ${selectedIds.length === 0 ? 'opacity-50 pointer-events-none' : 'hover:bg-yellow-100'}`}
+            >
+              <Plus className={`h-5 w-5 ${selectedIds.length > 0 ? 'text-white' : ''}`} />
+            </Button>
             <Button
               variant="ghost"
               size="icon"
@@ -330,9 +362,6 @@ const Participants = () => {
       </div>
 
       <div className="mb-6">
-        <p className="text-muted-foreground mb-2">
-          View and analyze participants available for draft selection. Add participants to your wishlist for easy access during the draft.
-        </p>
         <div className="flex gap-2">
           <Badge variant="outline" className="border-gray-300">
             Available: {participantsList.length}
@@ -348,21 +377,22 @@ const Participants = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredAndSortedParticipants.map((participant) => (
-          <div key={participant.id} className="bg-card p-4 rounded-lg border shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-start justify-between mb-3">
-              <div>
-                <h3 className="font-semibold text-lg text-foreground">{participant.name}</h3>
-                <p className="text-sm text-muted-foreground">ID: {participant.id}</p>
-              </div>
-              <div className={`px-2 py-1 rounded-full text-xs font-medium ${
-                participant.Status === 'Available' ? 'bg-green-100 text-green-800' :
-                participant.Status === 'Interviewing' ? 'bg-blue-100 text-blue-800' :
-                participant.Status === 'Hired' ? 'bg-purple-100 text-purple-800' :
-                participant.Status === 'On Hold' ? 'bg-gray-100 text-gray-800' :
-                'bg-red-100 text-red-800'
-              }`}>
-                {participant.Status}
-              </div>
+          <div key={participant.id} className="bg-card p-4 rounded-lg border shadow-sm hover:shadow-md transition-shadow relative">
+            {/* Selection Checkbox for Not Selected participants */}
+            {participant.Status === 'Not Selected' && !isInWishList(participant.id) && (
+              <label className="absolute top-3 right-3 flex items-center gap-1 z-10 rounded px-2 py-1 shadow">
+                <input
+                  type="checkbox"
+                  checked={selectedIds.includes(participant.id)}
+                  onChange={() => handleSelect(participant.id)}
+                  className="accent-yellow-400 cursor-pointer"
+                  title="Select to add to wishlist"
+                />
+              </label>
+            )}
+            <div className="mb-3">
+              <h3 className="font-semibold text-lg text-foreground">{participant.name}</h3>
+              <p className="text-sm text-muted-foreground">ID: {participant.id}</p>
             </div>
             
             <div className="space-y-2">
@@ -377,32 +407,15 @@ const Participants = () => {
                 <span className="text-sm font-medium text-muted-foreground">Experience:</span>
                 <span className="text-sm text-foreground">{participant.Experience}</span>
               </div>
-              
-              <div className="pt-2 flex gap-2">
-                {participant.Status === 'Available' && (
-                  <>
-                    {isInWishList(participant.id) ? (
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="flex-1 text-red-600 hover:text-red-700 hover:bg-red-50"
-                        onClick={() => removeFromWishList(participant.id)}
-                      >
-                        <Heart className="h-4 w-4 mr-1 fill-current" />
-                        Remove from Wishlist
-                      </Button>
-                    ) : (
-                      <Button 
-                        size="sm" 
-                        className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black"
-                        onClick={() => addToWishList(participant)}
-                      >
-                        <Plus className="h-4 w-4 mr-1" />
-                        Add to Wishlist
-                      </Button>
-                    )}
-                  </>
-                )}
+              {/* Status badge moved to bottom */}
+              <div className="flex justify-end mt-3">
+                <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  participant.Status === 'In Wishlist' ? 'bg-green-100 text-green-800' :
+                  participant.Status === 'Not Selected' ? 'bg-red-100 text-red-800' :
+                  'bg-gray-100 text-gray-800'
+                }`}>
+                  {participant.Status}
+                </div>
               </div>
             </div>
           </div>
