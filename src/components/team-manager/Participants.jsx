@@ -160,6 +160,7 @@ const Participants = () => {
         <div className="flex items-center gap-2">
           {/* Action Icons */}
           <div className="flex items-center gap-1 ml-2">
+            smthng
             <Button
               variant="ghost"
               size="icon"

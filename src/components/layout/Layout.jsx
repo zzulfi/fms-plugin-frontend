@@ -109,14 +109,8 @@ const Layout = () => {
               ) : (
                 <>
                   <Link 
-                    to="/" 
-                    className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                  >
-                    Home
-                  </Link>
-                  <Link 
                     to="/login" 
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                      className="bg-yellow-400 hover:bg-yellow-500 text-gray-600 px-4 py-2 rounded-md text-sm font-medium transition-colors"
                   >
                     Login
                   </Link>
