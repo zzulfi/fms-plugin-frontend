@@ -1,4 +1,6 @@
-const teams = [
+import { Team } from '@/types';
+
+const teams: Team[] = [
     {
         id: 1,
         name: "Axis",

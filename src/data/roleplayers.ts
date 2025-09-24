@@ -1,6 +1,7 @@
-import teams from "./teams.js";
+import teams from "./teams";
+import { RolePlayer } from '@/types';
 
-const rolePlayers = [
+const rolePlayers: RolePlayer[] = [
     {
         id: 1,
         name: "Admin",

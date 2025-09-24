@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
-import roleplayers from '@/data/roleplayers.js'
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import roleplayers from '@/data/roleplayers'
+import { AuthContextType, UserSession, LoginResult } from '@/types'
 
-const AuthContext = createContext(null)
+const AuthContext = createContext<AuthContextType | null>(null)
 
-export const useAuth = () => {
+export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext)
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider')
@@ -11,9 +12,13 @@ export const useAuth = () => {
   return context
 }
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<UserSession | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
 
   // Check for existing session on app load
   useEffect(() => {
@@ -24,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false)
   }, [])
 
-  const login = async (email, password) => {
+  const login = async (email: string, password: string): Promise<LoginResult> => {
     try {
       // Find user in roleplayers data
       const foundUser = roleplayers.find(

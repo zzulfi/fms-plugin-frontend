@@ -1,7 +1,6 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../components/layout/Layout'
-import Home from '../components/layout/Home'
 import AdminLayout from '../components/layout/AdminLayout'
 import TeamLayout from '../components/layout/TeamLayout'
 import { LoginPage } from '../components/custom/LoginPage'
