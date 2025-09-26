@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 45 93% 58%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 45 100% 96%;
+    --secondary-foreground: 45 93% 20%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 45 100% 96%;
+    --accent-foreground: 45 93% 20%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 45 93% 58%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 45 93% 58%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 45 93% 58%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+  
+  /* Subtle yellow accent theme */
+  .festie-accent {
+    background-color: hsl(45, 93%, 58%);
+    color: hsl(0, 0%, 0%);
+  }
+
+  .festie-accent:hover {
+    background-color: hsl(45, 93%, 52%);
+  }
+
+  .festie-subtle {
+    background-color: hsl(45, 100%, 98%);
+    border-color: hsl(45, 50%, 85%);
+  }
+
+  /* Clean button override */
+  .btn-primary {
+    background-color: hsl(45, 93%, 58%) !important;
+    color: hsl(0, 0%, 0%) !important;
+    border: none !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: hsl(45, 93%, 52%) !important;
+  }
+
+  /* Mobile sidebar minimal styling */
+  .mobile-optimized {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Custom slide animations for sheet */
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slideInFromRight 0.3s ease-out forwards;
+  }
+
+  /* Search input slide animation - slides from near the search icon */
+  @keyframes slideInFromNearby {
+    from {
+      transform: translateX(20px);
+      opacity: 0;
+      scale: 0.95;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  .animate-slide-in-nearby {
+    animation: slideInFromNearby 0.2s ease-out forwards;
+  }
+
+  /* Smooth sheet transitions */
+  .sheet-overlay {
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}

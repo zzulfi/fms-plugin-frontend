@@ -1,4 +1,4 @@
-import teams from "./teams.js";
+
 
 const draftState = {
     isActive: false,
@@ -9,4 +9,4 @@ const draftState = {
     draftHistory: []
 };
 
-export default draftState;          
+export default draftState;
